@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="0aa292c28bbabdb494a0a0b48f2d416ed4ab6f6a">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_eb1af8f709fab82023b1c167137c66c276df18e9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_6d7b68a3cc0746639563cd4d878890f47dda8b44/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f62d0ca0d1def3367e6425f183fbcadec5b8304a">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_72d2e1577d22737e6eb164e037afb2f2745eb5f0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_e8d0944cf70d0f9f75d8b52f0983a0a5843bdbf6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/.gradle/caches/modules-2/files-2.1/com.parse/parse-android/1.13.0/58a7d54b6a4f28be11f0cecec93097eddf473e6f/parse-android-1.13.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="58a7d54b6a4f28be11f0cecec93097eddf473e6f">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/parse-android-1.13.0_a3b8ff2aab1d9d062386b23369fc592660b1eb31/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-tasks-1.4.0_a711c04918b64ffbdb39f086756e27bbbc391c9a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_3f5856cef66be3c315b356bb5b5aad03570022d0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_214cb219799ba3192636bb4b95753820d561b64c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_b3302c7510bbee98afb59b03621adb4f6e280567/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_8ea47cc4395eca0ae6cac002b26f74ee5496f342/classes.dex" />
+    </item>
+
+</items>
