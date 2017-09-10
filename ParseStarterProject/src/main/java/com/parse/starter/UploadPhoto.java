@@ -186,7 +186,8 @@ public class UploadPhoto extends BaseActivity implements View.OnClickListener {
         } else if (view.getId() == R.id.uploadButton) {
             upload(view);
             Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
-            intent.putExtra("mode", "my");
+            intent.putExtra("username", ParseUser.getCurrentUser().getUsername());
+            intent.putExtra("mode", "any");
             startActivity(intent);
         }
     }

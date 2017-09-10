@@ -1,6 +1,7 @@
 package com.parse.starter;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -35,19 +39,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListActivity extends BaseActivity {
+public class UserListActivity extends BaseActivity implements View.OnClickListener {
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+        final ListView userListView = (ListView) findViewById(R.id.userListView);
+        final ArrayList<String> usernames = new ArrayList<String>();
 
         setTitle("Friends");
 
-        final ArrayList<String> usernames = new ArrayList<String>();
-
-        final ListView userListView = (ListView) findViewById(R.id.userListView);
+        Button search = (Button)findViewById(R.id.searchButton);
+        search.setOnClickListener(this);
 
         userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,6 +63,7 @@ public class UserListActivity extends BaseActivity {
 
                 Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
                 intent.putExtra("username", usernames.get(i));
+                intent.putExtra("mode", "any");
                 startActivity(intent);
 
             }
@@ -94,11 +103,65 @@ public class UserListActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void queryNewUser(String usernameText) {
+
+        final ListView userListView = (ListView) findViewById(R.id.userListView);
+        final ArrayList<String> usernames = new ArrayList<String>();
+        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, usernames);
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+
+        query.whereContains("username", usernameText);
+
+        query.addAscendingOrder("username");
+
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> objects, ParseException e) {
+
+                if (e == null) {
+
+                    if (objects.size() > 0) {
+
+                        for (ParseUser user : objects) {
+
+                            usernames.add(user.getUsername());
+
+                        }
+
+                        userListView.setAdapter(arrayAdapter);
+                    }
+
+                } else {
+
+                    e.printStackTrace();
+
+                }
+
+            }
+        });
+
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
+                intent.putExtra("username", usernames.get(i));
+                intent.putExtra("mode", "any");
+                startActivity(intent);
 
 
+            }
+        });
+    }
 
+    @Override
+    public void onClick(View view) {
+        EditText usernameText = (EditText) findViewById(R.id.searchText);
 
-
-
+        if (view.getId() == R.id.searchButton) {
+            queryNewUser(usernameText.getText().toString());
+        }
     }
 }

@@ -44,13 +44,14 @@ public class UserFeedActivity extends BaseActivity {
 
 
 
-        } else if (feedMode.equals("my")){
+        } else if (feedMode.equals("any")){
 
-            setTitle("My Feed");
+            String selectUser = intent.getStringExtra("username");
+            setTitle(selectUser + "' Feed");
 
             query = new ParseQuery<ParseObject>("Image");
 
-            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+            query.whereEqualTo("username", selectUser);
             query.orderByDescending("createdAt");
 
         }

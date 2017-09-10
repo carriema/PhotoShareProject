@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 user.setUsername(usernameEditText.getText().toString());
                 user.setPassword(passwordEditText.getText().toString());
+                user.put("Following", 0);
+                user.put("Follower", 0);
 
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
