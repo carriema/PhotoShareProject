@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText passwordEditText;
 
-    public void showUserList() {
 
-        Intent intent = new Intent(getApplicationContext(), UserListActivity.class);
+    public void showUserFeed() {
+
+        Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
+        intent.putExtra("mode", "all");
+        intent.putExtra("username", ParseUser.getCurrentUser().getUsername());
         startActivity(intent);
 
     }
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Log.i("Signup", "Successful");
 
-                            showUserList();
+                            showUserFeed();
 
                         } else {
 
@@ -141,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Log.i("Signup", "Login successful");
 
-                            showUserList();
+                            showUserFeed();
 
                         } else {
 
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
       if (ParseUser.getCurrentUser() != null) {
 
-          showUserList();
+          showUserFeed();
 
       }
 

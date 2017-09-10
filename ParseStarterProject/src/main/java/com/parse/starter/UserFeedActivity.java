@@ -15,10 +15,11 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
-public class UserFeedActivity extends AppCompatActivity {
+public class UserFeedActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +31,34 @@ public class UserFeedActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String activeUsername = intent.getStringExtra("username");
+        String feedMode = intent.getStringExtra("mode");
+        ParseQuery<ParseObject> query = null;
 
-        setTitle(activeUsername + "'s Feed");
+        if (feedMode.equals("all")) {
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Image");
+            setTitle("Friends' Feed");
 
-        query.whereEqualTo("username", activeUsername);
-        query.orderByDescending("createdAt");
+            String currentUser = intent.getStringExtra("username");
+
+            query = new ParseQuery<ParseObject>("Image");
+
+
+
+        } else if (feedMode.equals("my")){
+
+            setTitle("My Feed");
+
+            query = new ParseQuery<ParseObject>("Image");
+
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+            query.orderByDescending("createdAt");
+
+        }
+
+
+
+
+
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
