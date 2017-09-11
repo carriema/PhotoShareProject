@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user_list"
     android:layout_width="match_parent"
@@ -10,11 +11,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.parse.starter.UserListActivity">
 
-    <ListView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/userListView" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/searchText"
+                android:layout_weight="1"
+                android:hint="search user..."
+                android:textSize="18sp"
+                android:fontFamily="sans-serif" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/searchButton"
+                android:drawableStart="@android:drawable/ic_menu_search" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/userListView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 </RelativeLayout>

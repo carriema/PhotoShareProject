@@ -33,6 +33,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+import com.parse.constants.DatabaseSchema;
+import com.parse.manager.UserManager;
 
 import java.util.List;
 
@@ -45,9 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText passwordEditText;
 
-    public void showUserList() {
+    UserManager userManager;
 
-        Intent intent = new Intent(getApplicationContext(), UserListActivity.class);
+
+    public void showUserFeed() {
+
+        Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
+        intent.putExtra("mode", "all");
+        intent.putExtra("username", ParseUser.getCurrentUser().getUsername());
         startActivity(intent);
 
     }
@@ -110,18 +117,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (signUpModeActive) {
 
                 ParseUser user = new ParseUser();
+                final String username = usernameEditText.getText().toString();
 
-                user.setUsername(usernameEditText.getText().toString());
+                user.setUsername(username);
                 user.setPassword(passwordEditText.getText().toString());
-
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
 
+                            ParseObject object = new ParseObject(DatabaseSchema.FOLLOWER_COUNT);
+                            object.put(DatabaseSchema.USERNAME, username);
+                            object.put(DatabaseSchema.FOLLOWING, 0);
+                            object.put(DatabaseSchema.FOLLOWER, 0);
+                            object.saveInBackground();
+
                             Log.i("Signup", "Successful");
 
-                            showUserList();
+                            showUserFeed();
 
                         } else {
 
@@ -130,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+
+
 
             } else {
 
@@ -141,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Log.i("Signup", "Login successful");
 
-                            showUserList();
+                            showUserFeed();
 
                         } else {
 
@@ -167,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
       setTitle("Instagram");
 
+      userManager = UserManager.getUserManager();
+
       changeSignupModeTextView = (TextView) findViewById(R.id.changeSignupModeTextView);
 
       changeSignupModeTextView.setOnClickListener(this);
@@ -185,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
       if (ParseUser.getCurrentUser() != null) {
 
-          showUserList();
+          showUserFeed();
 
       }
 
