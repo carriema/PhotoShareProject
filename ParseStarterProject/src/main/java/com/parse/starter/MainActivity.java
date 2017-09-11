@@ -33,6 +33,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+import com.parse.constants.DatabaseSchema;
+import com.parse.manager.UserManager;
 
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView changeSignupModeTextView;
 
     EditText passwordEditText;
+
+    UserManager userManager;
 
 
     public void showUserFeed() {
@@ -113,16 +117,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (signUpModeActive) {
 
                 ParseUser user = new ParseUser();
+                final String username = usernameEditText.getText().toString();
 
-                user.setUsername(usernameEditText.getText().toString());
+                user.setUsername(username);
                 user.setPassword(passwordEditText.getText().toString());
-                user.put("Following", 0);
-                user.put("Follower", 0);
-
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
+
+                            ParseObject object = new ParseObject(DatabaseSchema.FOLLOWER_COUNT);
+                            object.put(DatabaseSchema.USERNAME, username);
+                            object.put(DatabaseSchema.FOLLOWING, 0);
+                            object.put(DatabaseSchema.FOLLOWER, 0);
+                            object.saveInBackground();
 
                             Log.i("Signup", "Successful");
 
@@ -135,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+
+
 
             } else {
 
@@ -171,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     setContentView(R.layout.activity_main);
 
       setTitle("Instagram");
+
+      userManager = UserManager.getUserManager();
 
       changeSignupModeTextView = (TextView) findViewById(R.id.changeSignupModeTextView);
 

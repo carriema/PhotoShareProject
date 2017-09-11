@@ -2,5 +2,9 @@
     {
         "merged": "/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/res/merged/debug/menu/share_menu.xml",
         "source": "/Users/myr/Desktop/Instagram/ParseStarterProject/src/main/res/menu/share_menu.xml"
+    },
+    {
+        "merged": "/Users/myr/Desktop/Instagram/ParseStarterProject/build/intermediates/res/merged/debug/menu/follow_user_menu.xml",
+        "source": "/Users/myr/Desktop/Instagram/ParseStarterProject/src/main/res/menu/follow_user_menu.xml"
     }
 ]
