@@ -33,6 +33,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.constants.DatabaseSchema;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -72,23 +73,23 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, usernames);
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(DatabaseSchema.USER_RELATION);
 
-        query.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
+        query.whereEqualTo(DatabaseSchema.FOLLOWER, ParseUser.getCurrentUser().getUsername());
 
-        query.addAscendingOrder("username");
+        query.addAscendingOrder(DatabaseSchema.FOLLOWING);
 
-        query.findInBackground(new FindCallback<ParseUser>() {
+        query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseUser> objects, ParseException e) {
+            public void done(List<ParseObject> objects, ParseException e) {
 
                 if (e == null) {
 
                     if (objects.size() > 0) {
 
-                        for (ParseUser user : objects) {
+                        for (ParseObject user : objects) {
 
-                            usernames.add(user.getUsername());
+                            usernames.add((String)user.get(DatabaseSchema.FOLLOWING));
 
                         }
 
@@ -113,6 +114,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
 
+        query.whereNotEqualTo("username", usernameText);
         query.whereContains("username", usernameText);
 
         query.addAscendingOrder("username");
