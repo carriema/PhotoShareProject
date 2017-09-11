@@ -44,6 +44,15 @@ public class BaseActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.friend) {
             Intent intent = new Intent(getApplicationContext(), UserListActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.myphoto) {
+            Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
+            intent.putExtra("mode", "any");
+            intent.putExtra("username", ParseUser.getCurrentUser().getUsername());
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.view) {
+            Intent intent = new Intent(getApplicationContext(), UserFeedActivity.class);
+            intent.putExtra("mode", "all");
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

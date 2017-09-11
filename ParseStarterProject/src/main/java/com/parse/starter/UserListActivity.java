@@ -114,8 +114,9 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
 
-        query.whereNotEqualTo("username", usernameText);
+        query.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
         query.whereContains("username", usernameText);
+
 
         query.addAscendingOrder("username");
 

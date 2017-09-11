@@ -18,20 +18,29 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.constants.DatabaseSchema;
+import com.parse.manager.FeedManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+
+import static com.parse.constants.DatabaseSchema.IMAGE_OB_ID;
 
 public class UploadPhoto extends BaseActivity implements View.OnClickListener {
 
 
     ImageView uploadPlace;
     Bitmap bitmap;
+    FeedManager feedManager;
 
     public void getPhoto() {
 
@@ -72,38 +81,6 @@ public class UploadPhoto extends BaseActivity implements View.OnClickListener {
 
                 Log.i("Photo", "Received");
 
-//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//
-//                byte[] byteArray = stream.toByteArray();
-//
-//                ParseFile file = new ParseFile("image.png", byteArray);
-//
-//                ParseObject object = new ParseObject("Image");
-//
-//                object.put("image", file);
-//
-//                object.put("username", ParseUser.getCurrentUser().getUsername());
-//
-//                object.saveInBackground(new SaveCallback() {
-//                    @Override
-//                    public void done(ParseException e) {
-//
-//                        if (e == null) {
-//
-//                            Toast.makeText(UploadPhoto.this, "Image Shared!", Toast.LENGTH_SHORT).show();
-//
-//                        } else {
-//
-//                            Toast.makeText(UploadPhoto.this, "Image could not be shared - please try again later.", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//
-//                    }
-//                });
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -125,6 +102,8 @@ public class UploadPhoto extends BaseActivity implements View.OnClickListener {
         Button uploadButton = (Button) findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(this);
 
+        feedManager = FeedManager.getInstance();
+
     }
 
     public void upload(View view) {
@@ -136,28 +115,47 @@ public class UploadPhoto extends BaseActivity implements View.OnClickListener {
 
         ParseFile file = new ParseFile("image.png", byteArray);
 
-        ParseObject object = new ParseObject("Image");
+        final ParseObject object = new ParseObject("Image");
 
         object.put("image", file);
 
         object.put("username", ParseUser.getCurrentUser().getUsername());
 
-        object.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
+        try {
+            object.save();
+            Toast.makeText(UploadPhoto.this, "Image Shared!", Toast.LENGTH_SHORT).show();
 
-                if (e == null) {
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(UploadPhoto.this, "Image could not be shared - please try again later.", Toast.LENGTH_SHORT).show();
+        }
 
-                    Toast.makeText(UploadPhoto.this, "Image Shared!", Toast.LENGTH_SHORT).show();
 
-                } else {
+        feedManager.pushFeed(ParseUser.getCurrentUser().getUsername(), object.getObjectId().toString(), object.getCreatedAt());
 
-                    Toast.makeText(UploadPhoto.this, "Image could not be shared - please try again later.", Toast.LENGTH_SHORT).show();
+//        ParseQuery<ParseObject> pushFeed = new ParseQuery<ParseObject>(DatabaseSchema.IMAGE_DATABASE);
+//        pushFeed.whereEqualTo("id", IMAGE_OB_ID);
+//        pushFeed.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> objects, ParseException e) {
+//                if (e == null) {
+//                    for (ParseObject o : objects) {
+//                        Log.i("PushFEED", o.get("username").toString());
+//                        feedManager.pushFeed(ParseUser.getCurrentUser().getUsername(), o.getObjectId().toString(), o.getCreatedAt());
+//                    }
+//
+//                } else {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
 
-                }
 
-            }
-        });
+
+
+
+
 
 
     }

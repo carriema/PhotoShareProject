@@ -24,6 +24,7 @@ import com.parse.constants.DatabaseSchema;
 import com.parse.manager.UserManager;
 
 import java.util.List;
+import java.util.concurrent.Phaser;
 
 public class UserFeedActivity extends BaseActivity {
 
@@ -50,7 +51,7 @@ public class UserFeedActivity extends BaseActivity {
             userManager.addRelationShip(currentUser, selectedUser);
             userManager.followedOnePerson(currentUser, DatabaseSchema.FOLLOWER);
             userManager.followedOnePerson(selectedUser, DatabaseSchema.FOLLOWING);
-            Toast.makeText(this, "Already followed " + selectedUser, Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Already followed " + selectedUser, Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -74,7 +75,12 @@ public class UserFeedActivity extends BaseActivity {
             setTitle("Friends' Feed");
 
 
-            query = new ParseQuery<ParseObject>("Image");
+            ParseQuery<ParseObject> findUserFeed = new ParseQuery<ParseObject>(DatabaseSchema.USER_FEED);
+            findUserFeed.whereEqualTo(DatabaseSchema.USERNAME, ParseUser.getCurrentUser().getUsername());
+
+            findUserFeed.addDescendingOrder("createdAt");
+//            final List<ParseObject>
+
 
 
 
